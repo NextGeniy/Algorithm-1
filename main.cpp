@@ -179,6 +179,31 @@ public:
         }
         cout << "\n\n";
     }
+    int inputIntList(int q)
+    {
+        int N;
+        int m = 0;
+        int M = 0;
+        if (q == 1) {
+            M = NumObj();
+        }
+        else {
+            M = (NumObj()-1);
+        }
+        for (;;) {
+            if ((cin >> N).good() && (m <= N) && (N <= M)) return N;
+            if (cin.fail()) {
+                cin.clear();
+                cout << "Неверный ввод, повторите.\n";
+                cout << "Введите индекс (c 0)\n";
+            }
+            else {
+                cout << "Число вне допустимого диапазона значений. Повторите ввод.\n";
+                cout << "Введите индекс (c 0)\n";
+            }
+            cin.ignore(100, '\n');
+        }
+    }
 };
 string operations = "+-*/^";
 class Stack;
@@ -403,6 +428,30 @@ public:
         }
         cout << "\n";
     }
+    int inputIntArr(int e)
+    {
+        int N;
+        int m = 0, M = 0;
+        if (e == 1) {
+            M = size;
+        }
+        else {
+            M = (size - 1);
+        }
+        for (;;) {
+            if ((cin >> N).good() && (m <= N) && (N <= M)) return N;
+            if (cin.fail()) {
+                cin.clear();
+                cout << "Неверный ввод, повторите.\n";
+                cout << "Введите индекс (c 0)\n";
+            }
+            else {
+                cout << "Число вне допустимого диапазона значений. Повторите ввод.\n";
+                cout << "Введите индекс (c 0)\n";
+            }
+            cin.ignore(100, '\n');
+        }
+    }
 };
 int inputInt()
 {
@@ -420,6 +469,25 @@ int inputInt()
         cin.ignore(100, '\n');
     }
 }
+int inputIntData()
+{
+    int N;
+    int m = 0, M = 32000;
+    for (;;) {
+        if ((cin >> N).good() && (m <= N) && (N < M)) return N;
+        if (cin.fail()) {
+            cin.clear();
+            cout << "Неверный ввод, повторите.\n";
+            cout << "Введите значение\n";
+        }
+        else {
+            cout << "Число вне допустимого диапазона значений. Повторите ввод.\n";
+            cout << "Введите значение\n";
+        }
+        cin.ignore(100, '\n');
+    }
+}
+
 int main()
 {
     setlocale(0, "Rus");
@@ -451,16 +519,16 @@ int main()
                 case 1: {
                     int index, data;
                     cout << "Введите индекс (c 0) \n";
-                    cin >> index;
+                    index = MainList.inputIntList(q);
                     cout << "Введите значение \n";
-                    cin >> data;
+                    data=inputIntData();
                     MainList.Insertion(index, data);
                     break;
                 }
                 case 2: {
                     int index;
                     cout << "Введите индекс (c 0)\n";
-                    cin >> index;
+                    index = MainList.inputIntList(q);
                     cout << "Значение под заданным индексом\n";
                     cout << MainList.GetIndexData(index)<<"\n";
                     system("pause");
@@ -469,7 +537,7 @@ int main()
                 case 3: {
                     int data;
                     cout << "Введите значение элемента \n";
-                    cin >> data;
+                    data = inputIntData();
                     cout << "Индекс значения в списке \n";
                     cout << MainList.GetDataIndex(data) << "\n";
                     system("pause");
@@ -478,7 +546,7 @@ int main()
                 case 4: {
                     int index;
                     cout << "Введите индекс \n";
-                    cin >> index;
+                    index = MainList.inputIntList(q);
                     cout << "Список с удаленным элементом\n";
                     MainList.Delete(index);
                     break;
@@ -536,9 +604,9 @@ int main()
                 case 1: {
                     int index, data;
                     cout << "Введите индекс (c 0)\n";
-                    cin >> index;
+                    index = MainArr.inputIntArr(e);
                     cout << "Введите значение \n";
-                    cin >> data;
+                    data = inputIntData();
                     MainArr.AddElem(index, data);
                     MainArr.ShowArr();
                     break;
@@ -546,7 +614,7 @@ int main()
                 case 2: {
                     int index;
                     cout << "Введите индекс (c 0)\n";
-                    cin >> index;
+                    index = MainArr.inputIntArr(e);
                     cout << "Значение под заданным индексом\n";
                     MainArr.GetDataArr(index);
                     system("pause");
@@ -555,7 +623,7 @@ int main()
                 case 3: {
                     int data;
                     cout << "Введите значение элемента \n";
-                    cin >> data;
+                    data = inputIntData();
                     cout << "Индекс значения в списке \n";
                     MainArr.GetIndexArr(data);
                     system("pause");
@@ -564,7 +632,7 @@ int main()
                 case 4: {
                     int index;
                     cout << "Введите индекс (c 0)\n";
-                    cin >> index;
+                    index = MainArr.inputIntArr(e);
                     cout << "Список с удаленным элементом\n";
                     MainArr.DeleteElem(index);
                     break;
